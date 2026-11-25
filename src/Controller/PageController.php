@@ -2,60 +2,89 @@
 
 namespace App\Controller;
 
+use App\Service\TeamService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class PageController extends AbstractController
 {
+    private TeamService $teamService;
+
+    public function __construct(TeamService $teamService)
+    {
+        $this->teamService = $teamService;
+    }
+
     #[Route('/', name: 'index')]
     public function index(): Response
     {
-        return $this->render('page/index.html.twig', []);
+        $team = $this->teamService->getTeam();
+
+        return $this->render('page/index.html.twig', [
+            'team' => $team,
+        ]);
     }
+
     #[Route('/about', name: 'about')]
     public function about(): Response
     {
-    return $this->render('page/about.html.twig', []);
+        $team = $this->teamService->getTeam();
+
+        return $this->render('page/about.html.twig', [
+            'team' => $team,
+        ]);
     }
-    #[Route('/about', name: 'service')]
+
+    #[Route('/service', name: 'service')]
     public function service(): Response
     {
-    return $this->render('page/service.html.twig', []);
+        return $this->render('page/service.html.twig', []);
     }
-    #[Route('/about', name: 'product')]
+
+    #[Route('/product', name: 'product')]
     public function product(): Response
     {
-    return $this->render('page/product.html.twig', []);
+        return $this->render('page/product.html.twig', []);
     }
-    #[Route('/about', name: 'price')]
+
+    #[Route('/price', name: 'price')]
     public function price(): Response
     {
-    return $this->render('page/price.html.twig', []);
+        return $this->render('page/price.html.twig', []);
     }
-    #[Route('/about', name: 'team')]
+
+    #[Route('/team', name: 'team')]
     public function team(): Response
     {
-    return $this->render('page/team.html.twig', []);
+        $team = $this->teamService->getTeam();
+
+        return $this->render('page/team.html.twig', [
+            'team' => $team,
+        ]);
     }
-    #[Route('/about', name: 'testimonial')]
+
+    #[Route('/testimonial', name: 'testimonial')]
     public function testimonial(): Response
     {
-    return $this->render('page/testimonial.html.twig', []);
+        return $this->render('page/testimonial.html.twig', []);
     }
-    #[Route('/about', name: 'blog')]
+
+    #[Route('/blog', name: 'blog')]
     public function blog(): Response
     {
-    return $this->render('page/blog.html.twig', []);
+        return $this->render('page/blog.html.twig', []);
     }
-    #[Route('/about', name: 'detail')]
+
+    #[Route('/detail', name: 'detail')]
     public function detail(): Response
     {
-    return $this->render('page/detail.html.twig', []);
+        return $this->render('page/detail.html.twig', []);
     }
-    #[Route('/about', name: 'contact')]
+
+    #[Route('/contact', name: 'contact')]
     public function contact(): Response
     {
-    return $this->render('page/contact.html.twig', []);
+        return $this->render('page/contact.html.twig', []);
     }
 }
